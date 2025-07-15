@@ -112,12 +112,11 @@ class PermissionGraph:
                                                                                          EdgeType.PARENT)
 
         def dfs(child_id):
-            for edge in self.graph.edges:
-                for parent_id in child_to_parent_mapping.get(child_id, []):
-                    if parent_id not in visited_nodes:
-                        visited_nodes.add(parent_id)
-                        resource_hierarchy.append(parent_id)
-                        dfs(parent_id)
+            for parent_id in child_to_parent_mapping.get(child_id, []):
+                if parent_id not in visited_nodes:
+                    visited_nodes.add(parent_id)
+                    resource_hierarchy.append(parent_id)
+                    dfs(parent_id)
 
         dfs(node.node_id)
         return resource_hierarchy
